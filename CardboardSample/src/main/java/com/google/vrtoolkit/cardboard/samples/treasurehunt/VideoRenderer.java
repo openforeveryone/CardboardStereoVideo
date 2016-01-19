@@ -19,13 +19,14 @@ import java.nio.ShortBuffer;
 /**
  * Created by Matthew Wellings on 1/18/16.
  */
-public class VideoRenderer implements SurfaceTexture.OnFrameAvailableListener {
+public class VideoRenderer {
 
     private static float virtualScreenVetrexCoords[] = {
             -1,  1, 0,
             -1, -1, 0,
             1, -1, 0,
             1,  1, 0 };
+
     private static short virtualScreenVetrexIndicies[] = {
             0, 1, 2,
             0, 2, 3};
@@ -135,7 +136,6 @@ public class VideoRenderer implements SurfaceTexture.OnFrameAvailableListener {
         parentMainActivity.checkGLError("VideoRenderer set up texture");
 
         VideoSurfaceTexture = new SurfaceTexture(videoTextureID);
-        VideoSurfaceTexture.setOnFrameAvailableListener(this);
 
         mMediaPlayer = new MediaPlayer();
         try
@@ -208,10 +208,5 @@ public class VideoRenderer implements SurfaceTexture.OnFrameAvailableListener {
     public void cleanup() {
         if (mMediaPlayer!=null)
             mMediaPlayer.release();
-    }
-
-    @Override
-    public void onFrameAvailable(SurfaceTexture surfaceTexture) {
-
     }
 }
